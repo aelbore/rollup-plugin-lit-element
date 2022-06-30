@@ -1,0 +1,41 @@
+{
+  "name": "rollup-plugin-lit-element",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "serve": "vite",
+    "counter": "qoi build -c ./test/hello-world/qoi.config.counter.ts",
+    "build": "qoi build --dts -f es,cjs --emptyOutDir --external rollup,@swc/core,@swc/core/Visitor.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aelbore/rollup-plugin-lit-element.git"
+  },
+  "keywords": [],
+  "author": "Arjay Elbore <aelbore.sg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aelbore/rollup-plugin-lit-element/issues"
+  },
+  "homepage": "https://github.com/aelbore/rollup-plugin-lit-element#readme",
+  "peerDependencies": {
+    "sass": "^1.53.0",
+    "@swc/core": "^1.2.205",
+    "@rollup/pluginutils": "^4.2.1"
+  },
+  "dependencies": {
+    "swc-ast-helpers": "^0.1.0"
+  },
+  "devDependencies": {
+    "@qoi/build": "^0.2.0",
+    "@qoi/cli": "^0.2.0",
+    "@qoi/types": "^0.0.7",
+    "@rollup/pluginutils": "^4.2.1",
+    "lit": "^2.2.7",
+    "rollup-plugin-dts": "^4.2.2",
+    "sass": "^1.53.0",
+    "typescript": "^4.7.4",
+    "vite": "^2.9.13",
+    "vitest": "^0.16.0"
+  }
+}

@@ -1,0 +1,6 @@
+node_modules
+dist
+index.html
+counter.ts
+vite.config.ts
+qoi.config.counter.ts
