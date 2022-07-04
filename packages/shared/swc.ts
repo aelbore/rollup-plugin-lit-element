@@ -12,15 +12,20 @@ export const swcTransformer = (
   id: string, 
   options?: SwcOptions
 ) => {
+  const { paths, plugins } = options || {}
   return transformSync(code, {
     jsc: {
-      parser: { syntax: 'typescript' },
+      parser: { 
+        syntax: 'typescript', 
+        decorators: true, 
+        dynamicImport: true 
+      },
       target: 'es2022',
-      ...(options?.paths ? { paths: options?.paths  }: {})
+      ...(paths ? { paths  }: {})
     },
     filename: id,
     sourceMaps: true,
     isModule: true,
-    plugin: Plugins(options.plugins || [])
+    plugin: Plugins(plugins || [])
   })
 }

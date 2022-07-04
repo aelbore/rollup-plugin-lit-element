@@ -1,9 +1,9 @@
 import type { Plugin } from 'rollup'
 import type { Program } from '@swc/core'
-import type { Enfore, Options, ViteInject } from '@/shared'
+import type { Enforce, Options, ViteInject } from 'shared'
 
 import { InlineTransformer, Transformer } from './transformer'
-import { swcTransformer,  cssfilter, tsJsFilter  } from '@/shared'
+import { swcTransformer,  cssfilter, tsJsFilter  } from 'shared'
  
 export default function css(options?: Options) {
   const { vite, enforce = 'post' } = options || {}
@@ -29,5 +29,5 @@ export default function css(options?: Options) {
         ]
       })
     }
-  } as Plugin & { enforce?: Enfore }
+  } as Plugin & { enforce?: Enforce }
 } 

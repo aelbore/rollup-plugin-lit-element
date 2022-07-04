@@ -1,7 +1,7 @@
 import type { Plugin } from 'rollup'
-import type { Enfore, Options } from '@/shared'
+import type { Enforce, Options } from 'shared'
 
-import { swcTransformer, tsJsFilter, cssfilter } from '@/shared'
+import { swcTransformer, tsJsFilter, cssfilter } from 'shared'
 
 import { rewriteImportStyles } from './rewrite'
 import { createStyleClassStatement } from './statement'
@@ -11,7 +11,7 @@ export default function styles(options: Options = {}) {
   const vite = (typeof options.vite == 'boolean') ? options.vite: true
   return {
     name: 'styles',
-    enfore: 'pre',
+    enforce: 'pre',
     transform(code: string, id: string) {
       if (tsJsFilter(id)) {
         return swcTransformer(code, id, {
@@ -24,5 +24,5 @@ export default function styles(options: Options = {}) {
       }
       return null
     }
-  } as Plugin & { enfore?: Enfore }
+  } as Plugin & { enforce?: Enforce }
 }

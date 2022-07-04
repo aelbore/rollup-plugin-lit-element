@@ -2,8 +2,9 @@ import { createRequire } from 'module'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
 
-import Css from '@/css'
-import Styles from '@/styles'
+import Css from 'css'
+import Styles from 'styles'
+import Decorators from 'decorators'
 
 import type { Plugin } from 'vite'
 
@@ -22,7 +23,7 @@ const getPaths = () => {
 
 const Plugins = (style: boolean, css: boolean) => {
   const paths = getPaths()
-  return [ Styles({ paths, vite: style }), Css({ paths, vite: { inject: css } }) ] as Plugin[]
+  return [ Decorators(), Styles({ paths, vite: style }), Css({ paths, vite: { inject: css } }) ] as Plugin[]
 }
 
 export const ViteLit = () => Plugins(true, false)

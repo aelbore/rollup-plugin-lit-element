@@ -13,7 +13,7 @@ import type {
 import { Visitor } from '@swc/core/Visitor.js'
 import * as swc from 'swc-ast-helpers'
 
-import { getClassDeclaration, getStyleImportDefaultDeclarations } from '@/shared'
+import { getClassDeclaration, getStyleImportDefaultDeclarations } from 'shared'
 
 const filterStaticStyles = (content: ClassDeclaration) => content.body.filter(item => (!isStyleStaticClassProperty(item)))
 
@@ -37,11 +37,11 @@ const updateClassDeclaration = (items: ModuleItem[], styles: ImportDefaultSpecif
     .map(content => {
       if (swc.isExportDeclaration(content) && swc.isClasDeclaration(content.declaration)) {
         content.declaration.body = filterStaticStyles(content.declaration)
-        content.declaration.body.push(styleProperty)
+        content.declaration.body.unshift(styleProperty)
       }
       if (swc.isClasDeclaration(content)) {
         content.body = filterStaticStyles(content)
-        content.body.push(styleProperty)
+        content.body.unshift(styleProperty)
       }
       return content
     })

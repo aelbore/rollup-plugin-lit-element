@@ -14,11 +14,13 @@
       "DOM"
     ],
     "paths": {
-      "/@/*": [ "./test/hello-world/*" ],
-      "@/css": [ "./packages/css/index.ts" ],
-      "@/shared": [ "./packages/shared/index.ts" ],
-      "@/styles": [ "./packages/styles/index.ts" ],
-      "@/plugin": [ "./src/index.ts" ]
+      "/@/*": [ "./examples/hello-world/*" ],
+      "@/plugin": [ "./src/index.ts" ],
+      "css": [ "./packages/css/index.ts" ],
+      "decorators": [ "./packages/decorators/index.ts" ],
+      "decorators/*": [ "./packages/decorators/*" ],
+      "shared": [ "./packages/shared/index.ts" ],
+      "styles": [ "./packages/styles/index.ts" ]
     }
   }
 }

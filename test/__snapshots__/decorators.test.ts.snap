@@ -1,0 +1,80 @@
+// Vitest Snapshot v1
+
+exports[`decorators > should transform 1`] = `
+"import { LitElement } from 'lit';
+export class HelloWorld extends LitElement {
+    static properties = {
+        message: {
+            type: String
+        }
+    };
+    constructor(){
+        super();
+        this.message = 'World';
+    }
+    get element() {
+        return this.renderRoot?.querySelector('i-element');
+    }
+    get inputElement() {
+        return this.renderRoot?.querySelectorAll('i-input-element');
+    }
+}
+customElements.define('hello-world', HelloWorld);
+"
+`;
+
+exports[`decorators > should transform customElement decorators 1`] = `
+"import { LitElement } from 'lit';
+export class HelloWorld extends LitElement {
+}
+customElements.define('hello-world', HelloWorld);
+"
+`;
+
+exports[`decorators > should transform property decorators 1`] = `
+"import { LitElement } from 'lit';
+export class HelloWorld extends LitElement {
+    static properties = {
+        message: {
+            type: Number
+        }
+    };
+    constructor(){
+        super();
+        this.message = null;
+    }
+}
+"
+`;
+
+exports[`decorators > should transform property decorators existing properties 1`] = `
+"import { LitElement } from 'lit';
+export class HelloWorld extends LitElement {
+    static properties = {
+        count: {
+            type: Number
+        },
+        message: {
+            reflect: true
+        }
+    };
+    constructor(){
+        super();
+        this.message = \\"World\\";
+    }
+}
+"
+`;
+
+exports[`decorators > should transform query/queryAll decorators 1`] = `
+"import { LitElement } from 'lit';
+export class HelloWorld extends LitElement {
+    get element() {
+        return this.renderRoot?.querySelector('bto-input');
+    }
+    get el() {
+        return this.renderRoot?.querySelectorAll('bto-element');
+    }
+}
+"
+`;

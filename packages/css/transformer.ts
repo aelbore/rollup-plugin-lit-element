@@ -11,7 +11,7 @@ import type {
   Identifier
 } from '@swc/core'
 
-import type { Options } from '@/shared'
+import type { Options } from 'shared'
 
 const isVariableDeclarator = (declaration: VariableDeclarator, value: string) => 
   swc.isVariableDeclarator(declaration) 
