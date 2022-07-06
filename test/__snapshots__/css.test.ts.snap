@@ -1,0 +1,21 @@
+// Vitest Snapshot v1
+
+exports[`css > should update export to css template literals 1`] = `
+"import { css as cssTag } from 'lit';
+import { createHotContext as __vite__createHotContext } from \\"/@vite/client\\";
+import.meta.hot = __vite__createHotContext(\\"/src/hello-world.scss\\");
+import { updateStyle as __vite__updateStyle, removeStyle as __vite__removeStyle } from \\"/@vite/client\\";
+const __vite__id = \\"/Users/override/Desktop/workspace/github/vite-lit-stater/src/hello-world.scss\\";
+const __vite__css = cssTag\`:host h1 { color: blue; border: 1px solid green; padding: 10px; }\`;
+__vite__updateStyle(__vite__id, __vite__css);
+import.meta.hot.accept();
+export default __vite__css;
+import.meta.hot.prune(()=>__vite__removeStyle(__vite__id));
+"
+`;
+
+exports[`css > should update the css template literals when it is default arrow 1`] = `
+"import { css as cssTag } from 'lit';
+export default cssTag\`:host h1{color:#00f;border:1px solid green;padding:10px}\`;
+"
+`;

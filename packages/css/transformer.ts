@@ -7,8 +7,8 @@ import type {
   StringLiteral, 
   VariableDeclaration, 
   VariableDeclarator, 
-  Expression, 
-  Identifier
+  Expression,
+  ModuleItem
 } from '@swc/core'
 
 import type { Options } from 'shared'
@@ -19,6 +19,12 @@ const isVariableDeclarator = (declaration: VariableDeclarator, value: string) =>
     && declaration.id.value.includes(value)
     && swc.isStringLiteral(declaration.init as Expression)
 
+const isVariableDeclaration = (value: string) => {
+  return (item: ModuleItem) => 
+    swc.isVariableDeclaration(item) 
+    && item.declarations.find(declaration => isVariableDeclarator(declaration, value))
+}
+
 export class Transformer extends Visitor {
   constructor(private options?: Options) {
     super()
@@ -26,14 +32,8 @@ export class Transformer extends Visitor {
 
   visitModule(m: Module) {
     const defaultExport = m.body.find(item => swc.isExportDefaultExpression(item)) as ExportDefaultExpression
+
     if (defaultExport) {
-      const value = (defaultExport.expression as Identifier).value
-
-      const item = m.body.find(item => {
-        return swc.isVariableDeclaration(item) 
-          && item.declarations.find(declaration => isVariableDeclarator(declaration, value))
-      }) as VariableDeclaration
-
       const { importPackage = 'lit' } = this.options || {}
       const cssTag = swc.createIdentifer('cssTag')
 
@@ -42,34 +42,53 @@ export class Transformer extends Visitor {
           cssTag, 
           swc.createTemplateLiteral([ swc.createTemplateElement(value, true) ]))
 
-      if (item) {
-        const index = m.body.indexOf(item)
+      if (swc.isStringLiteral(defaultExport.expression) || swc.isIdentifer(defaultExport.expression)) {
+        const value = defaultExport.expression.value
+        const item = m.body.find(isVariableDeclaration(value)) as VariableDeclaration
+  
+        if (item) {
+          const index = m.body.indexOf(item)
 
-        item.declarations = item.declarations.map(declaration => {
-          if (isVariableDeclarator(declaration, value)) {
-            const rawValue = (declaration.init as StringLiteral).value
-            declaration.init = createTaggedTemplate(rawValue)
-          }
-          return declaration
-        })
-        m.body[index] = item
+          item.declarations = item.declarations.map(declaration => {
+            if (isVariableDeclarator(declaration, value)) {
+              const rawValue = (declaration.init as StringLiteral).value
+              declaration.init = createTaggedTemplate(rawValue)
+            }
+            return declaration
+          })
+          m.body[index] = item
+        }
+  
+        if (!item) {
+          m.body.forEach(item => {
+            if (swc.isExportDefaultExpression(item)) {
+              const rawValue = (item.expression as StringLiteral).value
+              item.expression = createTaggedTemplate(rawValue)
+            }
+          })
+        }
       }
 
-      if (!item) {
-        m.body.forEach(item => {
-          if (swc.isExportDefaultExpression(item)) {
-            const rawValue = (item.expression as StringLiteral).value
-            item.expression = createTaggedTemplate(rawValue)
-          }
-        })
-      }
-      
+      m.body.forEach(item => {
+        if (
+          swc.isExportDefaultExpression(item) 
+          && swc.isCallExpression(item.expression)
+          && swc.isParenthesisExpression(item.expression.callee)
+          && swc.isArrowFunctionExpression(item.expression.callee.expression)
+          && swc.isStringLiteral(item.expression.callee.expression.body)
+        ) {
+          const rawValue = item.expression.callee.expression.body.value
+          item.expression = createTaggedTemplate(rawValue)
+        }
+      })
+
       m.body.unshift(
         swc.createImportDeclaration(
           [ swc.createNamedImportSpecifier(cssTag, 'css') ], 
-          importPackage
+          swc.createStringLiteral(importPackage)
         ))
     }
+
     return m
   }
 }

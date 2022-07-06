@@ -20,7 +20,7 @@ const escape = (str: string): string => str
 export function transform(code: string, id: string) {
   const css = extname(id).includes('.scss') ? createImportModule('sass').compile(id).css: code
   return { 
-    code: `export default "${escape(css).replace(/\r?\n|\r/g, '')}";`, 
+    code: `export default '${escape(css).replace(/\r?\n|\r/g, '')}';`, 
     map: { mappings: '' } 
   } as import('rollup').SourceDescription
 }

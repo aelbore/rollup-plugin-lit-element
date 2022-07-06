@@ -17,9 +17,9 @@ const customElementStatement = (tag: StringLiteral, element: string) => {
     ))
 }
 
-const filterDecorators = (decorators: Decorator[]) => {
-  return decorators.filter(decorator => (!(hasDecorator(decorator, 'customElement'))))
-}
+const filterDecorators = (decorators: Decorator[]) => 
+  decorators.filter(decorator => (!(hasDecorator(decorator, 'customElement'))))
+
 
 class CustomElementTransformer extends Visitor { 
   visitModule(m: Module) {
