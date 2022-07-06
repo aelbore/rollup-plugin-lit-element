@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-lit-element",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "scripts": {
     "serve": "vite",
@@ -12,7 +12,11 @@
     "type": "git",
     "url": "git+https://github.com/aelbore/rollup-plugin-lit-element.git"
   },
-  "keywords": [],
+  "keywords": [
+    "lit",
+    "webcomponents",
+    "custom-elements"
+  ],
   "author": "Arjay Elbore <aelbore.sg@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -21,7 +25,7 @@
   "homepage": "https://github.com/aelbore/rollup-plugin-lit-element#readme",
   "peerDependencies": {
     "sass": "^1.53.0",
-    "@swc/core": "^1.2.209",
+    "@swc/core": "^1.2.210",
     "@rollup/pluginutils": "^4.2.1"
   },
   "dependencies": {
@@ -32,7 +36,7 @@
     "@qoi/cli": "^0.2.0",
     "@qoi/types": "^0.0.7",
     "@rollup/pluginutils": "^4.2.1",
-    "@swc/core": "^1.2.209",
+    "@swc/core": "^1.2.210",
     "lit": "^2.2.7",
     "rollup-plugin-dts": "^4.2.2",
     "sass": "^1.53.0",

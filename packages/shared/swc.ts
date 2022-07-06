@@ -18,7 +18,8 @@ export const swcTransformer = (
       parser: { 
         syntax: 'typescript', 
         decorators: true, 
-        dynamicImport: true 
+        dynamicImport: true,
+        tsx: true
       },
       target: 'es2022',
       ...(paths ? { paths  }: {})
