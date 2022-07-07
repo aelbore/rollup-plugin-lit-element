@@ -2,7 +2,7 @@ import type { Plugin } from 'rollup'
 import type { Enforce, Options, ViteInject } from 'shared'
 
 import { InlineTransformer, Transformer } from './transformer'
-import { swcTransformer, cssfilter, tsJsFilter  } from 'shared'
+import { swcTransformer, cssfilter, filter  } from 'shared'
 
 export * from './transformer'
  
@@ -13,6 +13,7 @@ export function InlineCss(options?: Options) {
     name: 'css',
     enforce,
     transform(code: string, id: string) {
+      const tsJsFilter = filter('js', options?.exclude || [])
       if (!tsJsFilter(id)  || (typeof vite == 'boolean' && vite) || isViteInject) return
       return swcTransformer(code, id, {
         paths: options?.paths,

@@ -7,12 +7,20 @@ import Styles from 'styles'
 import Decorators from 'decorators'
 
 import type { Plugin } from 'vite'
+import type { Options, TSConfig } from '../packages/shared'
 
-type TSConfig = { 
-  compilerOptions?: { paths?: { [from: string]: [string] }  } 
+const Plugins = (style: boolean, css: boolean, options?: Options) => {
+  const { overridePaths = false, exclude = [], paths: tsPaths } = options || {}
+  const paths = overridePaths ? tsPaths ?? getTsConfigPaths(): getTsConfigPaths() 
+  return [ 
+    Decorators({ paths, exclude }),
+    Styles({ paths, exclude, vite: style }),  
+    InlineCss({ paths, exclude, vite: { inject: css } }),
+    Css({ paths, exclude, vite: { inject: css } }) 
+  ] as Plugin[]
 }
 
-const getPaths = () => {
+export const getTsConfigPaths = () => {
   const requireModule = <T extends TSConfig>(path: string) => {
     try { return require(path) as T }
     catch { return createRequire(import.meta.url)(path) as T }
@@ -21,15 +29,5 @@ const getPaths = () => {
   return existsSync(tsConfigPath) ? requireModule(tsConfigPath).compilerOptions?.paths: undefined
 }
 
-const Plugins = (style: boolean, css: boolean) => {
-  const paths = getPaths()
-  return [ 
-    Decorators(), 
-    Styles({ paths, vite: style }),  
-    InlineCss({ paths, vite: { inject: css } }),
-    Css({ paths, vite: { inject: css } }) 
-  ] as Plugin[]
-}
-
-export const ViteLit = () => Plugins(true, false)
-export const Lit = () => Plugins(false, true)
+export const ViteLit = (options?: Pick<Options, 'overridePaths' | 'paths' | 'exclude'>) => Plugins(true, false, options)
+export const Lit = (options?: Pick<Options, 'overridePaths' | 'paths'>) => Plugins(false, true, options)
