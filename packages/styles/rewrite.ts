@@ -3,7 +3,7 @@ import { Visitor } from '@swc/core/Visitor.js'
 
 import * as swc from 'swc-ast-helpers'
 
-import { getClassDeclaration } from 'shared'
+import { getClassDeclaration } from '../shared'
 
 const removeQuotes = (value: string) => value.replace(/'/g, '').replace(/"/g, '')
 const randomId = () => Math.random().toString(36).substring(2);

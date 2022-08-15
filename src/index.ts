@@ -2,12 +2,16 @@ import { createRequire } from 'module'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
 
-import { InlineCss, Css } from 'css'
-import Styles from 'styles'
+import { InlineCss, Css } from '../packages/css/index'
+import { styles as Styles } from '../packages/styles/index'
 import Decorators from 'decorators'
 
 import type { Plugin } from 'vite'
-import type { Options, TSConfig } from '../packages/shared'
+import type { Options, TSConfig } from '../packages/shared/types'
+
+export { swcTransformer, filter } from '../packages/shared/index'
+export { transform as transformCss  } from '../packages/styles/transform'
+export { Styles, InlineCss }
 
 const Plugins = (style: boolean, css: boolean, options?: Options) => {
   const { overridePaths = false, exclude = [], paths: tsPaths } = options || {}
@@ -30,4 +34,4 @@ export const getTsConfigPaths = () => {
 }
 
 export const ViteLit = (options?: Pick<Options, 'overridePaths' | 'paths' | 'exclude'>) => Plugins(true, false, options)
-export const Lit = (options?: Pick<Options, 'overridePaths' | 'paths'>) => Plugins(false, true, options)
+export const Lit = (options?: Pick<Options, 'overridePaths' | 'paths' | 'exclude'>) => Plugins(false, true, options)

@@ -17,8 +17,8 @@ const escape = (str: string): string => str
   .replace(/`/g, '\\`')
   .replace(/\\(?!`)/g, '\\\\')
 
-export function transform(code: string, id: string) {
-  const css = extname(id).includes('.scss') ? createImportModule('sass').compile(id).css: code
+export function transform(code: string, id: string, options?: Options<'sync'>) {
+  const css = extname(id).includes('.scss') ? createImportModule('sass').compile(id, options).css: code
   return { 
     code: `export default '${escape(css).replace(/\r?\n|\r/g, '')}';`, 
     map: { mappings: '' } 

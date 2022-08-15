@@ -13,6 +13,7 @@ export interface Options {
   importPackage?: string
   overridePaths?: boolean
   exclude?: string | string[]
+  minify?: boolean
   paths?: {
     [from: string]: [string]
   }
