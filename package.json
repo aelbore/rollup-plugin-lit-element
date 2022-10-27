@@ -4,8 +4,8 @@
   "description": "",
   "scripts": {
     "serve": "vite",
-    "counter": "qoi build --emptyOutDir -c ./examples/qoi.config.counter.ts",
-    "build": "qoi build --dts resolve -f es,cjs --emptyOutDir --external rollup,@swc/core,@swc/core/Visitor.js",
+    "counter": "qoi-cleanOutDir build --cleanOutDir -c ./examples/qoi.config.counter.ts",
+    "build": "qoi-cli build --dts --cleanOutDir -f es,cjs --external rollup,@swc/core,@swc/core/Visitor.js",
     "test": "vitest"
   },
   "repository": {
@@ -24,24 +24,20 @@
   },
   "homepage": "https://github.com/aelbore/rollup-plugin-lit-element#readme",
   "peerDependencies": {
-    "@rollup/pluginutils": "^5.0.1",
-    "@swc/core": "^1.3.9",
+    "@rollup/pluginutils": "^5.0.2",
+    "@swc/core": "^1.3.11",
     "sass": "^1.55.0"
   },
   "dependencies": {
     "swc-ast-helpers": "^0.2.2"
   },
   "devDependencies": {
-    "@qoi/build": "^0.2.3",
-    "@qoi/cli": "^0.2.3",
-    "@qoi/types": "^0.0.8",
-    "@rollup/pluginutils": "^5.0.1",
-    "@swc/core": "^1.3.9",
+    "@rollup/pluginutils": "^5.0.2",
     "lit": "^2.4.0",
-    "rollup-plugin-dts": "^5.0.0",
+    "qoi-cli": "^0.1.1",
     "sass": "^1.55.0",
     "typescript": "^4.8.4",
-    "vite": "^3.1.8",
+    "vite": "^3.2.0",
     "vitest": "^0.24.3"
   }
 }
