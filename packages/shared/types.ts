@@ -1,3 +1,5 @@
+export type { InputPlugin } from 'qoi-cli'
+
 export type Enforce = 'pre' | 'post'
 export type ViteInject = { inject?: boolean }
 export type Vite = ViteInject | boolean

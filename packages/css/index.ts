@@ -1,5 +1,4 @@
-import type { Plugin } from 'rollup'
-import type { Enforce, Options, ViteInject } from '../shared'
+import type { InputPlugin, Options, ViteInject } from '../shared'
 
 import { InlineTransformer, Transformer } from './transformer'
 import { swcTransformer, filter  } from '../shared'
@@ -20,7 +19,7 @@ export function InlineCss(options?: Options) {
         plugins: [ (p) => new InlineTransformer().visitProgram(p) ]
       })
     }
-  } as Plugin & { enforce?: Enforce }
+  } as InputPlugin
 }
 
 export function Css(options?: Options) {
@@ -36,5 +35,5 @@ export function Css(options?: Options) {
         plugins: [ (p) => new Transformer(options).visitProgram(p) ]
       })
     }
-  } as Plugin & { enforce?: Enforce }
+  } as InputPlugin
 } 

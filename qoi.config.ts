@@ -15,5 +15,8 @@ export default defineConfig({
     const outDir = './node_modules/rollup-plugin-lit-element'
     existsSync(outDir) && await rm(outDir, { recursive: true }) 
     await rename('./dist', outDir)
+  },
+  dts: {
+    resolve: [ 'qoi-cli' ]
   }
 })

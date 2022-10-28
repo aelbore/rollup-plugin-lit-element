@@ -521,10 +521,10 @@ postcss@^8.4.18:
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-qoi-cli@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/qoi-cli/-/qoi-cli-0.1.1.tgz#e65a40d02dfc87fa7835bfce7323014b70404c4c"
-  integrity sha512-U3VQkgfS7AC1KwHMcEldpMvhiOHuQPDpsUtuIWvCVkKxGahlBunpkle4nVj62SFJ4+v8v1U6Ny+RYMOe4cbXBg==
+qoi-cli@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/qoi-cli/-/qoi-cli-0.2.0.tgz#c1ccd87b56361d4371d33c000d31cf6612a0f595"
+  integrity sha512-1IsBOCsYjMsah5ZZI2nuc9nqi46MYlyWvosi2O7WBAu+H01ToswQSPqdZB8oBmLDDmqh4jpupzuw9RsuKO2aDQ==
   dependencies:
     "@swc/core" "^1.3.11"
     rollup "^3.2.3"

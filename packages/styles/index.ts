@@ -1,5 +1,4 @@
-import type { Plugin } from 'rollup'
-import type { Enforce, Options } from '../shared'
+import type { InputPlugin, Options } from '../shared'
 
 import { swcTransformer, filter } from '../shared'
 
@@ -31,5 +30,5 @@ export function styles(options: Options = {}) {
       }
       return null
     }
-  } as Plugin & { enforce?: Enforce }
+  } as InputPlugin
 }

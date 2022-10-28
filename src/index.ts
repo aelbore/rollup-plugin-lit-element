@@ -6,8 +6,7 @@ import { InlineCss, Css } from '../packages/css/index'
 import { styles as Styles } from '../packages/styles/index'
 import Decorators from 'decorators'
 
-import type { Plugin } from 'vite'
-import type { Options, TSConfig } from '../packages/shared/types'
+import type { Options, InputPlugin, TSConfig } from '../packages/shared/types'
 
 export { swcTransformer, filter } from '../packages/shared/index'
 export { transform as transformCss  } from '../packages/styles/transform'
@@ -21,7 +20,7 @@ const Plugins = (style: boolean, css: boolean, options?: Options) => {
     Styles({ paths, exclude, vite: style }),  
     InlineCss({ paths, exclude, vite: { inject: css } }),
     Css({ paths, exclude, vite: { inject: css } }) 
-  ] as Plugin[]
+  ] as InputPlugin[]
 }
 
 export const getTsConfigPaths = () => {
