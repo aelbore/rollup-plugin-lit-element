@@ -10,6 +10,7 @@ import type { Options, InputPlugin, TSConfig } from '../packages/shared/types'
 
 export { swcTransformer, filter } from '../packages/shared/index'
 export { transform as transformCss  } from '../packages/styles/transform'
+export { rewriteImportStyles, createStyleClassStatement } from '../packages/styles/index'
 export { Styles, InlineCss }
 
 const Plugins = (style: boolean, css: boolean, options?: Options) => {

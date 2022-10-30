@@ -1,10 +1,10 @@
 {
   "name": "rollup-plugin-lit-element",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "scripts": {
     "serve": "vite",
-    "counter": "qoi-cleanOutDir build --cleanOutDir -c ./examples/qoi.config.counter.ts",
+    "counter": "qoi-cli build --cleanOutDir -c ./examples/qoi.config.counter.ts",
     "build": "qoi-cli build --cleanOutDir -f es,cjs --external rollup,@swc/core,@swc/core/Visitor.js",
     "test": "vitest"
   },
@@ -34,10 +34,10 @@
   "devDependencies": {
     "@rollup/pluginutils": "^5.0.2",
     "lit": "^2.4.0",
-    "qoi-cli": "^0.2.0",
+    "qoi-cli": "^0.4.0",
     "sass": "^1.55.0",
     "typescript": "^4.8.4",
-    "vite": "^3.2.0",
+    "vite": "^3.2.1",
     "vitest": "^0.24.3"
   }
 }
