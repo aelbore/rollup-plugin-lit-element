@@ -16,6 +16,7 @@ export interface Options {
   overridePaths?: boolean
   exclude?: string | string[]
   minify?: boolean
+  sassOptions?: import('sass').Options<'sync'>
   paths?: {
     [from: string]: [string]
   }

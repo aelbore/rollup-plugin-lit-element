@@ -1,10 +1,12 @@
-import type { InputPlugin, Options } from 'shared'
+import type { InputPlugin, Options } from '../shared/index'
 
-import { swcTransformer, tsJsFilter } from 'shared'
+import { swcTransformer, tsJsFilter } from '../shared/index'
 
 import { customElementTransformer } from './custom-element'
 import { inlinePropertyTransformer } from './property'
 import { queryTransformer } from './query'
+
+export { customElementTransformer, inlinePropertyTransformer, queryTransformer }
 
 export default function decorators(options: Options = {}) {
   return {

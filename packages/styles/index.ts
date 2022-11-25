@@ -26,7 +26,13 @@ export function styles(options: Options = {}) {
         })
       }
       if (cssfilter(id) && (!vite)) {
-        return transform(code, id, options.minify ? { style: 'compressed' }: {})
+        return transform(
+          code, 
+          id, 
+          {
+            ...options?.minify ? { style: 'compressed' }: {},
+            ...options?.sassOptions || {}
+          })
       }
       return null
     }

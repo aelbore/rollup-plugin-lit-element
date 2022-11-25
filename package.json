@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-lit-element",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "",
   "scripts": {
     "serve": "vite",
@@ -24,15 +24,16 @@
   },
   "homepage": "https://github.com/aelbore/rollup-plugin-lit-element#readme",
   "dependencies": {
-    "swc-ast-helpers": "^0.2.2"
+    "swc-ast-helpers": "^0.3.0"
   },
   "devDependencies": {
     "@rollup/pluginutils": "^5.0.2",
-    "lit": "^2.4.0",
-    "qoi-cli": "^0.4.0",
-    "sass": "^1.55.0",
-    "typescript": "^4.8.4",
-    "vite": "^3.2.1",
-    "vitest": "^0.24.3"
+    "lit": "^2.4.1",
+    "qoi-cli": "^0.7.0",
+    "rollup-plugin-tsconfig-paths": "^1.4.0",
+    "sass": "^1.56.1",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.4",
+    "vitest": "^0.25.3"
   }
 }
