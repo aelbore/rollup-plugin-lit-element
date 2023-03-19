@@ -7,7 +7,8 @@ import type {
   ClassProperty,
   Identifier,
   Module,
-  Program 
+  Program,
+  ClassMethod
 } from '@swc/core'
 
 import * as swc from 'swc-ast-helpers'
@@ -41,10 +42,16 @@ class QueryTransformer extends Visitor {
     const members = moduleItem?.body?.filter(member => 
       hasQueryState(member, 'query') || hasQueryState(member, 'queryAll'))
 
-    if (moduleItem && members?.length >  0) {
+    if (moduleItem && members?.length) {
       const getters = createGetProperties(members)
+      const properties = getters.map(g => ((g as ClassMethod).key as Identifier).value)
       const toUpdateMember = (members: ClassMember[]) => {
-        const newMembers = updateMemberDecorators(members, Object.keys(Query))
+        const newMembers = updateMemberDecorators(
+          members.filter(member => {
+            return (!(swc.isClassProperty(member) && properties.includes((member.key as Identifier).value)))
+          }), 
+          Object.keys(Query)
+        )
         return [ ...newMembers, ...getters ]
       }
       m.body.forEach(content => {

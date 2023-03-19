@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-lit-element",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "",
   "scripts": {
     "serve": "vite",
@@ -28,12 +28,13 @@
   },
   "devDependencies": {
     "@rollup/pluginutils": "^5.0.2",
-    "lit": "^2.4.1",
-    "qoi-cli": "^0.7.0",
+    "lit": "^2.6.1",
+    "minify-html-literals": "^1.3.5",
+    "qoi-cli": "^0.12.3",
     "rollup-plugin-tsconfig-paths": "^1.4.0",
-    "sass": "^1.56.1",
-    "typescript": "^4.9.3",
-    "vite": "^3.2.4",
-    "vitest": "^0.25.3"
+    "sass": "^1.59.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.2.0",
+    "vitest": "^0.29.3"
   }
 }
