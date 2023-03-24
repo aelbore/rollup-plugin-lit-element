@@ -6,13 +6,13 @@ import * as swc from 'swc-ast-helpers'
 
 import type { Module, Decorator, Program, CallExpression, StringLiteral, ModuleItem, Argument, Identifier } from '@swc/core'
 
-const customElementStatement = (tag: StringLiteral, element: string) => {
+const customElementStatement = (tag: StringLiteral, element: Identifier) => {
   return swc.createExpressionStatement(
     swc.createCallExpression(
       swc.createMemberExpression(swc.createIdentifer('customElements'), swc.createIdentifer('define')),
       [
         { expression: tag },
-        { expression: swc.createIdentifer(element) }
+        { expression: element }
       ]
     ))
 }
@@ -37,8 +37,8 @@ class CustomElementTransformer extends Visitor {
       })
 
       const tag = (decorator?.expression as CallExpression)?.arguments[0]?.expression as StringLiteral
-      const element = moduleItem.identifier.value
-      if (!hasCustomElementStatement(m.body, tag.value, element)) {
+      const element = moduleItem.identifier
+      if (!hasCustomElementStatement(m.body, tag.value, element.value)) {
         m.body.push(customElementStatement(tag, element))
       }
     }
