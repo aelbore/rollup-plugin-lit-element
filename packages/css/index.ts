@@ -4,7 +4,6 @@ import { InlineTransformer, Transformer } from './transformer'
 import { swcTransformer, filter  } from '../shared'
 
 export * from './transformer'
- 
 export function InlineCss(options?: Options) {
   const { vite, enforce = 'post' } = options || {}
   const isViteInject = (vite as ViteInject)?.inject
@@ -16,6 +15,7 @@ export function InlineCss(options?: Options) {
       if (!tsJsFilter(id)  || (typeof vite == 'boolean' && vite) || isViteInject) return
       return swcTransformer(code, id, {
         paths: options?.paths,
+        baseUrl: options?.baseUrl,
         plugins: [ (p) => new InlineTransformer().visitProgram(p) ]
       })
     }
@@ -32,8 +32,9 @@ export function Css(options?: Options) {
       if (!cssfilter(id.split('?')[0]) || !vite) return
       return swcTransformer(code, id, {
         paths: options?.paths,
+        baseUrl: options.baseUrl,
         plugins: [ (p) => new Transformer(options).visitProgram(p) ]
       })
     }
   } as InputPlugin
-} 
+}

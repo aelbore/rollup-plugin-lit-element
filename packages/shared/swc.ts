@@ -5,23 +5,25 @@ export interface SwcOptions {
   paths?: {
     [from: string]: [string];
   }
+  baseUrl?: string
 }
 
 export const swcTransformer = (
-  code: string, 
-  id: string, 
+  code: string,
+  id: string,
   options?: SwcOptions
 ) => {
-  const { paths, plugins } = options || {}
+  const { paths, plugins, baseUrl } = options || {}
   return transformSync(code, {
     jsc: {
-      parser: { 
-        syntax: 'typescript', 
-        decorators: true, 
+      parser: {
+        syntax: 'typescript',
+        decorators: true,
         dynamicImport: true,
         tsx: true
       },
       target: 'es2022',
+      ...(baseUrl ? { baseUrl }: {}),
       ...(paths ? { paths  }: {})
     },
     filename: id,

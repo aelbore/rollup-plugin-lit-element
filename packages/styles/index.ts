@@ -22,13 +22,14 @@ export function styles(options: Options = {}) {
       if (tsJsFilter(id)) {
         return swcTransformer(code, id, {
           paths: options.paths,
+          baseUrl: options.baseUrl,
           plugins: [ rewriteImportStyles(), createStyleClassStatement() ]
         })
       }
       if (cssfilter(id) && (!vite)) {
         return transform(
-          code, 
-          id, 
+          code,
+          id,
           {
             ...options?.minify ? { style: 'compressed' }: {},
             ...options?.sassOptions || {}

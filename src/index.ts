@@ -15,13 +15,13 @@ export { Decorators, customElementTransformer, queryTransformer, inlinePropertyT
 export { Styles, InlineCss }
 
 const Plugins = (style: boolean, css: boolean, options?: Options) => {
-  const { overridePaths = false, exclude = [], paths: tsPaths } = options || {}
-  const paths = overridePaths ? tsPaths ?? getTsConfigPaths(): getTsConfigPaths() 
-  return [ 
-    Decorators({ paths, exclude }),
-    Styles({ paths, exclude, vite: style }),  
-    InlineCss({ paths, exclude, vite: { inject: css } }),
-    Css({ paths, exclude, vite: { inject: css } }) 
+  const { overridePaths = false, exclude = [], paths: tsPaths, baseUrl } = options || {}
+  const paths = overridePaths ? tsPaths ?? getTsConfigPaths(): getTsConfigPaths()
+  return [
+    Decorators({ paths, exclude, baseUrl }),
+    Styles({ paths, exclude, vite: style, baseUrl }),
+    InlineCss({ paths, exclude, vite: { inject: css }, baseUrl }),
+    Css({ paths, exclude, vite: { inject: css }, baseUrl })
   ] as InputPlugin[]
 }
 
@@ -34,5 +34,5 @@ export const getTsConfigPaths = () => {
   return existsSync(tsConfigPath) ? requireModule(tsConfigPath).compilerOptions?.paths: undefined
 }
 
-export const ViteLit = (options?: Pick<Options, 'overridePaths' | 'paths' | 'exclude'>) => Plugins(true, false, options)
-export const Lit = (options?: Pick<Options, 'overridePaths' | 'paths' | 'exclude'>) => Plugins(false, true, options)
+export const ViteLit = (options?: Pick<Options, 'overridePaths' | 'paths' | 'exclude' | 'baseUrl'>) => Plugins(true, false, options)
+export const Lit = (options?: Pick<Options, 'overridePaths' | 'paths' | 'exclude' | 'baseUrl'>) => Plugins(false, true, options)

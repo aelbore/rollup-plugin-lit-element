@@ -16,8 +16,9 @@ export default function decorators(options: Options = {}) {
       if (tsJsFilter(id)) {
         return swcTransformer(code, id, {
           paths: options.paths,
-          plugins: [ 
-            customElementTransformer(), 
+          baseUrl: options.baseUrl,
+          plugins: [
+            customElementTransformer(),
             inlinePropertyTransformer(),
             queryTransformer()
           ]

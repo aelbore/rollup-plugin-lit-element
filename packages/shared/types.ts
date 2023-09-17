@@ -4,9 +4,9 @@ export type Enforce = 'pre' | 'post'
 export type ViteInject = { inject?: boolean }
 export type Vite = ViteInject | boolean
 
-export type TSConfig = { 
+export type TSConfig = {
   overridePaths?: boolean
-  compilerOptions?: { paths?: { [from: string]: [string] }  } 
+  compilerOptions?: { paths?: { [from: string]: [string] }  }
 }
 
 export interface Options {
@@ -20,4 +20,5 @@ export interface Options {
   paths?: {
     [from: string]: [string]
   }
+  baseUrl?: string
 }
